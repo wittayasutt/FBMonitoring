@@ -1,0 +1,36 @@
+// @import 'bulma/sass/utilities/initial-variables.sass';
+@import 'bulma/bulma.sass';
+
+@font-face {
+	font-family: 'Kanit';
+	font-weight: 200;
+	src: local('Kanit'), local('Kanit-Light'),
+		url(../static/fonts/Kanit/Kanit-Light.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Kanit';
+	font-weight: 400;
+	src: local('Kanit'), local('Kanit-Regular'),
+		url(../static/fonts/Kanit/Kanit-Regular.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Kanit';
+	font-weight: 500;
+	src: local('Kanit'), local('Kanit-Medium'),
+		url(../static/fonts/Kanit/Kanit-Medium.ttf) format('truetype');
+}
+
+$primary: #71aeef;
+$secondary: #ad9ce9;
+$accent: #1abaed;
+
+$light: #f2f1f1;
+$dark: #2f2c3d;
+
+$family-primary: 'Kanit';
+
+body {
+	font-family: 'Kanit';
+}
