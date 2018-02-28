@@ -3,8 +3,6 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-	flex: 3;
-
 	.text {
 		display: inline-flex;
 		margin-right: 8px;

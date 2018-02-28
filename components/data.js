@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import DataKeywords from './dataKeywords'
-import DataFeed from './dataFeed'
+import Feed from './Feed'
 
 const Wrapper = styled.div`
-	/* padding: 40px 0; */
+	display: flex;
+	flex-direction: row;
+	padding: 24px;
 
 	@media screen and (max-width: 768px) {
-		/* padding: 40px 0.75rem; */
+		flex-direction: column;
 	}
 `
 
-const Keywords = styled.div``
-
-const Feed = styled.div``
+const Keywords = styled.div`
+	flex: 1;
+`
 
 const FeedTitle = styled.div``
 
@@ -27,13 +29,12 @@ class Data extends Component {
 		const { theme } = this.props
 
 		return (
-			<Wrapper className="columns">
-				<Keywords className="column is-3">
+			<Wrapper>
+				<Keywords>Keywords</Keywords>
+				{/* <Keywords className="column is-3">
 					<DataKeywords theme={theme} />
-				</Keywords>
-				<Feed className="column is-9">
-					<DataFeed theme={theme} />
-				</Feed>
+				</Keywords> */}
+				<Feed theme={theme} />
 			</Wrapper>
 		)
 	}

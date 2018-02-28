@@ -16,6 +16,13 @@ const Wrapper = styled.div`
 	background: #ffffff;
 `
 
+const Divide = styled.div`
+	height: 10px;
+	width: 1px;
+	background: #f2f1f1;
+	margin: auto ${props => props.margin}px;
+`
+
 const Top = styled.div`
 	margin-bottom: 24px;
 	display: flex;
@@ -36,14 +43,26 @@ const Name = styled.div`
 	flex-direction: column;
 `
 
-const Type = styled.div`
+const DateAndType = styled.div`
 	font-size: 12px;
+	display: flex;
+	flex-direction: row;
+`
+
+const Type = styled.div`
 	color: ${props => props.color};
 `
 
-const Date = styled.div`
-	font-size: 12px;
-	color: #6d6b77;
+const Save = styled.div`
+	i {
+		font-size: 18px;
+		color: #eaeaea;
+		cursor: pointer;
+
+		:hover {
+			color: #fbd771;
+		}
+	}
 `
 
 const Middle = styled.div`
@@ -96,8 +115,6 @@ const Bottom = styled.div`
 `
 
 const Answer = styled.div`
-	flex: 1;
-
 	a {
 		color: #6d6b77;
 
@@ -136,9 +153,15 @@ class Box extends Component {
 					<UserPicture />
 					<Name>
 						{data.name}
-						<Type color={theme.accent}>{data.type}</Type>
+						<DateAndType color={theme.accent}>
+							{data.date}
+							<Divide margin={8} />
+							<Type color={theme.accent}>{data.type}</Type>
+						</DateAndType>
 					</Name>
-					<Date>{data.date}</Date>
+					<Save>
+						<i className="fas fa-bookmark" />
+					</Save>
 				</Top>
 				<Middle color={theme.accent}>
 					<Text borderColor={theme.accent} new={data.type !== 'Post'}>
@@ -152,10 +175,11 @@ class Box extends Component {
 					<Answer>
 						<a>ตอบ</a>
 					</Answer>
+					<Divide margin={16} />
 					<Sentiment>Sentiment</Sentiment>
-					<More color={theme.accent}>
+					{/* <More color={theme.accent}>
 						<a>ดูโพส</a>
-					</More>
+					</More> */}
 				</Bottom>
 			</Wrapper>
 		)

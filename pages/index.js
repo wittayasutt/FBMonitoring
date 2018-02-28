@@ -2,11 +2,70 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Head from '../components/head'
-import Nav from '../components/nav'
+import Side from '../components/side'
 import Graph from '../components/graph'
 import Data from '../components/data'
 
 import stylesheet from 'styles/index.scss'
+
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	background: #fafafa;
+`
+
+const Content = styled.div`
+	width: 100%;
+	margin: 0 auto;
+`
+
+const ContentHead = styled.div`
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background: #ffffff;
+	font-size: 16px;
+	box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.1);
+`
+
+const ContentHeadHamburger = styled.div`
+	display: none;
+
+	@media screen and (max-width: 1023px) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 60px;
+		min-width: 60px;
+		cursor: pointer;
+	}
+`
+
+const ContentHeadMenu = styled.div`
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 32px;
+
+	@media screen and (max-width: 1023px) {
+		padding: 0 16px;
+	}
+`
+
+const ContentBody = styled.div`
+	min-height: 554px;
+	background: #ffffff;
+	border: 1px solid #eaeaea;
+	border-radius: 5px;
+	margin: 32px;
+
+	@media screen and (max-width: 1023px) {
+		margin: 16px;
+	}
+`
 
 const GraphWrapper = styled.div`
 	height: 100vh;
@@ -44,14 +103,33 @@ class Index extends Component {
 		}
 	}
 
+	toggleSideBar = () => {
+		const open = !this.state.open
+		this.setState({ open })
+	}
+
 	render() {
 		const { userAgent, theme } = this.props
+		const { open } = this.state
 
 		return (
-			<div>
+			<Wrapper>
 				<style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 				<Head title="Home" />
-				<GraphWrapper background={theme.dark}>
+				<Side theme={theme} open={open} toggleSideBar={this.toggleSideBar} />
+				<Content>
+					<ContentHead>
+						<ContentHeadHamburger onClick={this.toggleSideBar}>
+							<i className="fas fa-bars" />
+						</ContentHeadHamburger>
+						<ContentHeadMenu>Thanapa Suthisa-ngiam</ContentHeadMenu>
+					</ContentHead>
+					<ContentBody>
+						<Data theme={theme} />
+					</ContentBody>
+				</Content>
+
+				{/* <GraphWrapper background={theme.dark}>
 					<div className="container">
 						<Nav theme={theme} />
 						<Graph theme={theme} />
@@ -61,8 +139,8 @@ class Index extends Component {
 					<div className="container">
 						<Data theme={theme} />
 					</div>
-				</DataWrapper>
-			</div>
+				</DataWrapper> */}
+			</Wrapper>
 		)
 	}
 }

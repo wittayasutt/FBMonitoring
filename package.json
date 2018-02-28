@@ -6,6 +6,7 @@
 		"start": "NODE_ENV=production node server.js"
 	},
 	"dependencies": {
+		"antd": "^3.2.1",
 		"autoprefixer": "^7.2.4",
 		"babel-plugin-module-resolver": "^3.0.0",
 		"babel-plugin-styled-components": "^1.4.0",
@@ -36,5 +37,8 @@
 			"lost": {},
 			"postcss-nested": {}
 		}
+	},
+	"devDependencies": {
+		"babel-plugin-import": "^1.6.5"
 	}
 }

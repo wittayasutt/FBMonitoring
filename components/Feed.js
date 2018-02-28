@@ -3,7 +3,9 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Box from './box'
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+	flex: 3;
+`
 
 const Title = styled.div`
 	display: flex;
