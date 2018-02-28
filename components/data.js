@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import DataKeywords from './dataKeywords'
-import Feed from './Feed'
+import Filter from './filter'
+import Feed from './feed'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -12,10 +12,6 @@ const Wrapper = styled.div`
 	@media screen and (max-width: 768px) {
 		flex-direction: column;
 	}
-`
-
-const Keywords = styled.div`
-	flex: 1;
 `
 
 const FeedTitle = styled.div``
@@ -30,10 +26,11 @@ class Data extends Component {
 
 		return (
 			<Wrapper>
-				<Keywords>Keywords</Keywords>
+				{/* <Keywords>Keywords</Keywords> */}
 				{/* <Keywords className="column is-3">
 					<DataKeywords theme={theme} />
 				</Keywords> */}
+				<Filter theme={theme} />
 				<Feed theme={theme} />
 			</Wrapper>
 		)

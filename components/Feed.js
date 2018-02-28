@@ -4,7 +4,12 @@ import styled from 'styled-components'
 import Box from './box'
 
 const Wrapper = styled.div`
-	flex: 3;
+	flex: 1;
+	margin-left: 24px;
+
+	@media screen and (max-width: 768px) {
+		margin-left: 0px;
+	}
 `
 
 const Title = styled.div`
@@ -17,7 +22,11 @@ const LeftTitle = styled.div`
 	font-size: 24px;
 	font-weight: 500;
 `
-const RightTitle = styled.div``
+const RightTitle = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
 
 const Noti = styled.div`
 	height: 28px;

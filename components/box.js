@@ -53,7 +53,7 @@ const Type = styled.div`
 	color: ${props => props.color};
 `
 
-const Save = styled.div`
+const Saved = styled.div`
 	i {
 		font-size: 18px;
 		color: #eaeaea;
@@ -159,9 +159,9 @@ class Box extends Component {
 							<Type color={theme.accent}>{data.type}</Type>
 						</DateAndType>
 					</Name>
-					<Save>
+					<Saved>
 						<i className="fas fa-bookmark" />
-					</Save>
+					</Saved>
 				</Top>
 				<Middle color={theme.accent}>
 					<Text borderColor={theme.accent} new={data.type !== 'Post'}>
