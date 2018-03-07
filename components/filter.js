@@ -6,6 +6,10 @@ const Wrapper = styled.div`
 	width: 258px;
 	margin-top: 48px;
 	border-right: 1px solid #f2f1f1;
+
+	@media screen and (max-width: 768px) {
+		display: none;
+	}
 `
 
 const Zone = styled.div``

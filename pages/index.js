@@ -55,18 +55,6 @@ const ContentHeadMenu = styled.div`
 	}
 `
 
-const ContentBody = styled.div`
-	min-height: 554px;
-	background: #ffffff;
-	border: 1px solid #eaeaea;
-	border-radius: 5px;
-	margin: 32px;
-
-	@media screen and (max-width: 1023px) {
-		margin: 16px;
-	}
-`
-
 const GraphWrapper = styled.div`
 	height: 100vh;
 	background: ${props => props.background};
@@ -124,9 +112,7 @@ class Index extends Component {
 						</ContentHeadHamburger>
 						<ContentHeadMenu>Thanapa Suthisa-ngiam</ContentHeadMenu>
 					</ContentHead>
-					<ContentBody>
-						<Data theme={theme} />
-					</ContentBody>
+					<Data theme={theme} />
 				</Content>
 
 				{/* <GraphWrapper background={theme.dark}>

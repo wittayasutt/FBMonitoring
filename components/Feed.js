@@ -9,12 +9,24 @@ const Wrapper = styled.div`
 
 	@media screen and (max-width: 768px) {
 		margin-left: 0px;
+		padding: 10px;
+		background: #ffffff;
+		border: 1px solid #eaeaea;
+		border-top: 0;
+	}
+
+	:first-child {
+		margin-top: 0;
 	}
 `
 
 const Title = styled.div`
 	display: flex;
 	flex-direction: row;
+
+	@media screen and (max-width: 768px) {
+		display: none;
+	}
 `
 
 const LeftTitle = styled.div`
@@ -38,6 +50,16 @@ const Noti = styled.div`
 	color: #ffffff;
 	border-radius: 20px;
 	font-size: 14px;
+`
+
+const Boxes = styled.div`
+	@media screen and (max-width: 768px) {
+		> * {
+			:first-child {
+				margin-top: 0;
+			}
+		}
+	}
 `
 
 class DataFeed extends Component {
@@ -82,7 +104,9 @@ class DataFeed extends Component {
 						<Noti background={theme.accent}>10</Noti>
 					</RightTitle>
 				</Title>
-				{data.map((d, index) => <Box theme={theme} data={d} key={index} />)}
+				<Boxes>
+					{data.map((d, index) => <Box theme={theme} data={d} key={index} />)}
+				</Boxes>
 			</Wrapper>
 		)
 	}
