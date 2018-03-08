@@ -4,70 +4,106 @@ import styled from 'styled-components'
 import Sentiment from './sentiment'
 
 const Wrapper = styled.div`
-	min-height: 250px;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	margin-top: 12px;
-	border: 1px solid
-		${props => (props.new ? props => props.borderColor : '#F2F1F1')};
+	border: 1px solid #eaeaea;
 	border-radius: 10px;
-	padding: 24px 24px 16px;
+	padding: 0 20px;
 	background: #ffffff;
+	color: #2f2c3d;
+
+	@media screen and (max-width: 768px) {
+		padding: 0 10px;
+	}
 `
 
 const Divide = styled.div`
 	height: 10px;
 	width: 1px;
 	background: #f2f1f1;
-	margin: auto ${props => props.margin}px;
+	margin: auto 10px;
 `
 
-const Top = styled.div`
-	margin-bottom: 24px;
-	display: flex;
-	flex-direction: row;
-`
+const DivideDesktop = styled.div`
+	display: block !important;
+	height: 10px;
+	width: 1px;
+	background: #f2f1f1;
+	margin: auto 10px;
 
-const UserPicture = styled.div`
-	height: 40px;
-	width: 40px;
-	border-radius: 50%;
-	margin-right: 24px;
-	background: gray;
-`
-
-const Name = styled.div`
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-`
-
-const DateAndType = styled.div`
-	font-size: 12px;
-	display: flex;
-	flex-direction: row;
-`
-
-const Type = styled.div`
-	color: ${props => props.color};
-`
-
-const Saved = styled.div`
-	i {
-		font-size: 18px;
-		color: #eaeaea;
-		cursor: pointer;
-
-		:hover {
-			color: #fbd771;
-		}
+	@media screen and (max-width: 768px) {
+		display: none !important;
 	}
 `
 
-const Middle = styled.div`
+const Left = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	flex: 1;
-	font-size: 18px;
+`
+
+const Right = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const Top = styled.div`
+	display: flex !important;
+	height: 40px;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 8px;
+
+	@media screen and (max-width: 768px) {
+		display: none !important;
+	}
+`
+
+const TopMobile = styled.div`
+	display: none !important;
+	height: 44px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 8px;
+
+	@media screen and (max-width: 768px) {
+		display: flex !important;
+	}
+`
+
+const UserPicture = styled.div`
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	margin-right: 8px;
+	background: gray;
+
+	@media screen and (max-width: 768px) {
+		min-height: 24px;
+		min-width: 24px;
+	}
+`
+
+const Name = styled.div``
+
+const DateAndType = styled.div`
+	display: flex;
+	flex-direction: row;
+	color: #6d6b77;
+`
+
+const Type = styled.div`
+	color: #6d6b77;
+`
+
+const Middle = styled.div`
+	margin: 10px 0 20px;
+	font-size: 16px;
 
 	a {
 		color: ${props => props.color};
@@ -78,39 +114,11 @@ const Middle = styled.div`
 	}
 `
 
-const Text = styled.div`
-	border: 1px solid
-		${props => (props.new ? props => props.borderColor : 'none')};
-	padding: ${props => (props.new ? '16px' : '0px')};
-	border-radius: ${props => (props.new ? '10px' : '0px')};
-`
-
-const SeeFull = styled.div`
-	height: 26px;
-	width: 104px;
-	display: ${props => (props.more ? 'flex' : 'none')};
-	justify-content: center;
-	align-items: center;
-	margin: 16px auto 38px;
-	text-align: center;
-	font-size: 12px;
-	color: #6d6b77;
-	border: 1px solid #f2f1f1;
-	border-radius: 20px;
-	cursor: pointer;
-	transition: 0.2s;
-
-	:hover {
-		background: ${props => props.hover};
-		border: 1px solid ${props => props.hover};
-		color: #ffffff;
-	}
-`
-
 const Bottom = styled.div`
+	height: 40px;
 	display: flex;
-	padding-top: 10px;
-	font-size: 12px;
+	flex-direction: row;
+	align-items: center;
 	border-top: 1px solid #f2f1f1;
 `
 
@@ -124,18 +132,56 @@ const Answer = styled.div`
 	}
 `
 
-const More = styled.div`
-	flex: 1;
-	display: flex;
-	justify-content: flex-end;
+const Saved = styled.div`
+	display: flex !important;
+	align-items: center;
+	cursor: pointer;
 
-	a {
+	@media screen and (max-width: 768px) {
+		display: none !important;
+	}
+
+	i {
+		font-size: 18px;
+		color: #eaeaea;
+		margin-right: 6px;
+		transition: 0.2s;
+	}
+
+	:hover i {
 		color: ${props => props.color};
+	}
+`
 
-		:hover {
-			color: ${props => props.color};
-			opacity: 0.8;
-		}
+const SavedMobile = styled.div`
+	display: none !important;
+	align-items: center;
+	cursor: pointer;
+
+	@media screen and (max-width: 768px) {
+		display: flex !important;
+	}
+
+	i {
+		font-size: 18px;
+		color: #eaeaea;
+		margin-right: 6px;
+		transition: 0.2s;
+	}
+
+	:hover i {
+		color: ${props => props.color};
+	}
+`
+
+const More = styled.div`
+	color: ${props => props.color};
+	transition: 0.2s;
+	cursor: pointer;
+
+	:hover {
+		color: ${props => props.color};
+		opacity: 0.8;
 	}
 `
 
@@ -150,36 +196,49 @@ class Box extends Component {
 		return (
 			<Wrapper borderColor={theme.accent} new={data.type === 'Post'}>
 				<Top>
-					<UserPicture />
-					<Name>
+					<Left>
+						<UserPicture />
 						{data.name}
-						<DateAndType color={theme.accent}>
-							{data.date}
-							<Divide margin={8} />
-							<Type color={theme.accent}>{data.type}</Type>
-						</DateAndType>
-					</Name>
-					<Saved>
-						<i className="fas fa-bookmark" />
-					</Saved>
+						<Divide />
+						<Type>{data.type}</Type>
+					</Left>
+					<Right>{data.date}</Right>
 				</Top>
-				<Middle color={theme.accent}>
-					<Text borderColor={theme.accent} new={data.type !== 'Post'}>
-						{data.text}
-					</Text>
-					<SeeFull hover={theme.accent} more={data.type !== 'Post'}>
-						ดูโพสทั้งหมด
-					</SeeFull>
-				</Middle>
+				<TopMobile>
+					<Left>
+						<UserPicture />
+						<Name>
+							{data.name}
+							<DateAndType>
+								{data.date}
+								<Divide />
+								<Type>{data.type}</Type>
+							</DateAndType>
+						</Name>
+					</Left>
+					<Right>
+						<SavedMobile color={theme.accent}>
+							<i className="fas fa-bookmark" />
+						</SavedMobile>
+					</Right>
+				</TopMobile>
+				<Middle color={theme.accent}>{data.text}</Middle>
 				<Bottom>
-					<Answer>
-						<a>ตอบ</a>
-					</Answer>
-					<Divide margin={16} />
-					<Sentiment>Sentiment</Sentiment>
-					{/* <More color={theme.accent}>
-						<a>ดูโพส</a>
-					</More> */}
+					<Left>
+						<Answer>
+							<a>Read</a>
+						</Answer>
+						<Divide />
+						<Sentiment>Sentiment</Sentiment>
+						<DivideDesktop />
+						<Saved color={theme.accent}>
+							<i className="fas fa-bookmark" />
+							Saved
+						</Saved>
+					</Left>
+					<Right>
+						<More color={theme.accent}>ดูโพส</More>
+					</Right>
 				</Bottom>
 			</Wrapper>
 		)

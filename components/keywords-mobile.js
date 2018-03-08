@@ -102,7 +102,7 @@ const Divide = styled.div`
 	background: #e8e8e8;
 `
 
-class Filter extends Component {
+class Keywords extends Component {
 	constructor(props, context) {
 		super(props, context)
 	}
@@ -112,16 +112,10 @@ class Filter extends Component {
 	handleSort = () => {}
 
 	render() {
-		const { theme } = this.props
-		const dataFilter = [
-			{ text: 'CIMB', noti: 10 },
-			{ text: 'TMB', noti: 10 },
-			{ text: 'SCB', noti: 10 },
-			{ text: 'KBANK', noti: 10 }
-		]
+		const { theme, dataKeywords } = this.props
 
 		let all = 0
-		forEach(dataFilter, value => (all += value.noti))
+		forEach(dataKeywords, value => (all += value.noti))
 
 		const filter = (
 			<SelectFilter defaultValue="ALL" onChange={this.handleFilter}>
@@ -130,10 +124,10 @@ class Filter extends Component {
 					<Noti>{all}</Noti>
 					<Divide />
 				</Option>
-				{dataFilter.map((f, index) => (
-					<Option value={f.text} style={{ display: 'flex' }} key={index}>
-						<Text>{f.text}</Text>
-						<Noti>{f.noti}</Noti>
+				{dataKeywords.map((k, index) => (
+					<Option value={k.text} style={{ display: 'flex' }} key={index}>
+						<Text>{k.text}</Text>
+						<Noti>{k.noti}</Noti>
 						<Divide />
 					</Option>
 				))}
@@ -172,4 +166,4 @@ class Filter extends Component {
 	}
 }
 
-export default Filter
+export default Keywords

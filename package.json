@@ -23,6 +23,8 @@
 		"postcss-nested": "^3.0.0",
 		"raw-loader": "^0.5.1",
 		"react": "^16.2.0",
+		"react-d3": "^0.4.0",
+		"react-d3-basic": "^1.6.11",
 		"react-dom": "^16.2.0",
 		"sass-loader": "^6.0.6",
 		"styled-components": "^2.4.0",

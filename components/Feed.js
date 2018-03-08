@@ -1,32 +1,17 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import Switch from './switch'
+import Filter from './filter'
 import Box from './box'
 
 const Wrapper = styled.div`
-	flex: 1;
-	margin-left: 24px;
-
-	@media screen and (max-width: 768px) {
-		margin-left: 0px;
-		padding: 10px;
-		background: #ffffff;
-		border: 1px solid #eaeaea;
-		border-top: 0;
-	}
-
-	:first-child {
-		margin-top: 0;
-	}
+	margin-top: 24px;
 `
 
 const Title = styled.div`
 	display: flex;
 	flex-direction: row;
-
-	@media screen and (max-width: 768px) {
-		display: none;
-	}
 `
 
 const LeftTitle = styled.div`
@@ -34,6 +19,7 @@ const LeftTitle = styled.div`
 	font-size: 24px;
 	font-weight: 500;
 `
+
 const RightTitle = styled.div`
 	display: flex;
 	justify-content: center;
@@ -65,10 +51,20 @@ const Boxes = styled.div`
 class DataFeed extends Component {
 	constructor(props, context) {
 		super(props, context)
+
+		this.state = {
+			select: 'all'
+		}
+	}
+
+	handleSwitch = select => {
+		this.setState({ select })
 	}
 
 	render() {
 		const { theme } = this.props
+		const { select } = this.state
+
 		const data = [
 			{
 				name: 'Thanapa Suthisa-ngiam',
@@ -99,9 +95,16 @@ class DataFeed extends Component {
 		return (
 			<Wrapper>
 				<Title>
-					<LeftTitle>CIMB</LeftTitle>
+					<LeftTitle>
+						<Switch
+							handleSwitch={this.handleSwitch}
+							select={select}
+							theme={theme}
+						/>
+					</LeftTitle>
 					<RightTitle>
-						<Noti background={theme.accent}>10</Noti>
+						<Filter theme={theme} />
+						{/* <Noti background={theme.accent}>10</Noti> */}
 					</RightTitle>
 				</Title>
 				<Boxes>

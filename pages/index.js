@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import stylesheet from 'styles/index.scss'
 import Head from '../components/head'
 import Side from '../components/side'
-import Graph from '../components/graph'
-import Data from '../components/data'
+import Monitoring from '../components/monitoring'
 
-import stylesheet from 'styles/index.scss'
+// import Graph from '../components/graph'
+// import Data from '../components/data'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -112,9 +113,10 @@ class Index extends Component {
 						</ContentHeadHamburger>
 						<ContentHeadMenu>Thanapa Suthisa-ngiam</ContentHeadMenu>
 					</ContentHead>
-					<Data theme={theme} />
+					<Monitoring theme={theme} />
 				</Content>
 
+				{/* <Data theme={theme} /> */}
 				{/* <GraphWrapper background={theme.dark}>
 					<div className="container">
 						<Nav theme={theme} />
