@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import forEach from 'lodash/forEach'
 
 const Wrapper = styled.div`
 	background: #ffffff;
 	border: 1px solid #eaeaea;
 	border-radius: 5px;
+	padding-bottom: 24px;
 
 	@media screen and (max-width: 768px) {
 		display: none;
@@ -68,19 +68,13 @@ const Menu = styled.ul`
 	}
 `
 
+const Text = styled.div`
+	flex: 1;
+`
+
 const Noti = styled.div`
-	height: 24px;
-	width: 24px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-left: 16px;
-	font-size: 12px;
-	background: #1abaed;
-	color: #ffffff;
-	border-radius: 50px;
-	transition: 0.2s;
-	cursor: pointer;
+	color: #1abaed;
+	margin-right: 16px;
 `
 
 const More = styled.div`
@@ -116,25 +110,26 @@ class Keywords extends Component {
 	}
 
 	render() {
-		const { theme, dataKeywords } = this.props
-
-		let all = 0
-		forEach(dataKeywords, value => (all += value.noti))
+		const { theme, data } = this.props
+		const { dataKeywords, allKeywords, dataGroup } = data
 
 		return (
 			<Wrapper>
 				<Zone>
 					<Top>
-						<TopLeft>Keywords ({all})</TopLeft>
+						<TopLeft>Keywords (20)</TopLeft>
 						<TopRight>
 							<Sort>เรียงตามชื่อ</Sort>
 						</TopRight>
 					</Top>
 					<Menu>
-						<li>ทั้งหมด</li>
+						<li>
+							<Text>ทั้งหมด</Text>
+							<Noti>{allKeywords}</Noti>
+						</li>
 						{dataKeywords.map((k, index) => (
 							<li key={index}>
-								{k.text}
+								<Text>{k.text}</Text>
 								<Noti>{k.noti}</Noti>
 							</li>
 						))}
@@ -144,28 +139,17 @@ class Keywords extends Component {
 				<Divide />
 				<Zone>
 					<Top>
-						<TopLeft>Group (30)</TopLeft>
+						<TopLeft>Group (10)</TopLeft>
 					</Top>
 					<Menu>
-						<li>
-							ธนาคาร<Noti>10</Noti>
-						</li>
-						<li>
-							กองทุน<Noti>10</Noti>
-						</li>
-						<li>
-							หุ้น<Noti>10</Noti>
-						</li>
+						{dataGroup.map((g, index) => (
+							<li key={index}>
+								<Text>{g.text}</Text>
+								<Noti>{g.noti}</Noti>
+							</li>
+						))}
 					</Menu>
 					<More>ดูทั้งหมด</More>
-				</Zone>
-				<Divide />
-				<Zone>
-					<Top>
-						<TopLeft>
-							<i className="fas fa-bookmark" />Saved
-						</TopLeft>
-					</Top>
 				</Zone>
 			</Wrapper>
 		)

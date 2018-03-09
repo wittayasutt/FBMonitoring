@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Switch from './switch'
 import Filter from './filter'
 import Box from './box'
+import { Pagination } from 'antd'
 
 const Wrapper = styled.div`
 	margin-top: 24px;
@@ -38,15 +39,7 @@ const Noti = styled.div`
 	font-size: 14px;
 `
 
-const Boxes = styled.div`
-	@media screen and (max-width: 768px) {
-		> * {
-			:first-child {
-				margin-top: 0;
-			}
-		}
-	}
-`
+const Boxes = styled.div``
 
 class DataFeed extends Component {
 	constructor(props, context) {
@@ -110,6 +103,13 @@ class DataFeed extends Component {
 				<Boxes>
 					{data.map((d, index) => <Box theme={theme} data={d} key={index} />)}
 				</Boxes>
+				<Pagination
+					size="small"
+					defaultCurrent={1}
+					total={300}
+					pageSize={30}
+					style={{ textAlign: 'center', marginTop: '40px' }}
+				/>
 			</Wrapper>
 		)
 	}

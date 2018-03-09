@@ -5,6 +5,7 @@ import Keywords from './keywords'
 import KeywordsMobile from './keywords-mobile'
 import Graph from './graph'
 import Feed from './feed'
+import forEach from 'lodash/forEach'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -17,8 +18,13 @@ const Wrapper = styled.div`
 	}
 `
 
-const FilterWrapper = styled.div`
+const KeywordsWrapper = styled.div`
 	width: 250px;
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 8px;
+	}
 `
 
 const Content = styled.div`
@@ -40,19 +46,27 @@ class Data extends Component {
 	render() {
 		const { theme } = this.props
 
-		const dataKeywords = [
-			{ text: 'CIMB', noti: 10 },
-			{ text: 'TMB', noti: 10 },
-			{ text: 'SCB', noti: 10 },
-			{ text: 'KBANK', noti: 10 }
-		]
+		const data = {
+			dataKeywords: [
+				{ text: 'CIMB', noti: 10 },
+				{ text: 'TMB', noti: 10 },
+				{ text: 'SCB', noti: 10 },
+				{ text: 'KBANK', noti: 10 }
+			],
+			allKeywords: 0,
+			dataGroup: [{ text: 'หุ้น', noti: 10 }, { text: 'กองทุน', noti: 10 }],
+			allGroup: 0
+		}
+
+		forEach(data.dataKeywords, value => (data.allKeywords += value.noti))
+		forEach(data.dataGroup, value => (data.allGroup += value.noti))
 
 		return (
 			<Wrapper>
-				<FilterWrapper>
-					<Keywords theme={theme} dataKeywords={dataKeywords} />
-					<KeywordsMobile theme={theme} dataKeywords={dataKeywords} />
-				</FilterWrapper>
+				<KeywordsWrapper>
+					<Keywords theme={theme} data={data} />
+					<KeywordsMobile theme={theme} data={data} />
+				</KeywordsWrapper>
 				<Content>
 					<Graph />
 					<Feed theme={theme} />

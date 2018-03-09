@@ -56,15 +56,6 @@ const ContentHeadMenu = styled.div`
 	}
 `
 
-const GraphWrapper = styled.div`
-	height: 100vh;
-	background: ${props => props.background};
-`
-
-const DataWrapper = styled.div`
-	background: ${props => props.background};
-`
-
 class Index extends Component {
 	static getInitialProps({ req }) {
 		// Ensures material-ui renders the correct css prefixes server-side
@@ -115,19 +106,6 @@ class Index extends Component {
 					</ContentHead>
 					<Monitoring theme={theme} />
 				</Content>
-
-				{/* <Data theme={theme} /> */}
-				{/* <GraphWrapper background={theme.dark}>
-					<div className="container">
-						<Nav theme={theme} />
-						<Graph theme={theme} />
-					</div>
-				</GraphWrapper>
-				<DataWrapper background={theme.light}>
-					<div className="container">
-						<Data theme={theme} />
-					</div>
-				</DataWrapper> */}
 			</Wrapper>
 		)
 	}
