@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	background: ${props => props.background};
+	padding: 16px;
 `
 
 const Logo = styled.div`
@@ -36,6 +37,15 @@ const Content = styled.div`
 	h2 {
 		font-size: 32px;
 		margin-bottom: 32px;
+	}
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		padding: 16px;
+
+		h2 {
+			font-size: 24px;
+		}
 	}
 `
 
