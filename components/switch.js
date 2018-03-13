@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 const Wrapper = styled.div`
 	height: 32px;
@@ -32,21 +33,30 @@ const SwitchButton = styled.div`
 class Switch extends Component {
 	constructor(props, context) {
 		super(props, context)
+
+		this.state = {
+			select: 'all'
+		}
+	}
+
+	handleSwitch = select => {
+		this.setState({ select })
 	}
 
 	render() {
-		const { theme, handleSwitch, select } = this.props
+		const { theme } = this.props
+		const { select } = this.state
 
 		return (
 			<Wrapper>
 				<SwitchButton
-					onClick={() => handleSwitch('all')}
+					onClick={() => this.handleSwitch('all')}
 					select={select === 'all'}
 					active={theme.accent}>
 					All
 				</SwitchButton>
 				<SwitchButton
-					onClick={() => handleSwitch('saved')}
+					onClick={() => this.handleSwitch('saved')}
 					select={select === 'saved'}
 					active={theme.accent}>
 					Saved
@@ -56,4 +66,6 @@ class Switch extends Component {
 	}
 }
 
-export default Switch
+const mapStateToProps = ({ theme }) => ({ theme })
+
+export default connect(mapStateToProps)(Switch)

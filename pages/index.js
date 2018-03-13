@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import stylesheet from 'styles/index.scss'
+import theme from 'styles/theme'
+import withRedux from 'next-redux-wrapper'
+import { store } from '../store/configureStore'
+import { setTheme, setKeywords, setGroups } from '../actions'
+
 import Head from '../components/head'
 import Side from '../components/side'
 import Monitoring from '../components/monitoring'
-
-// import Graph from '../components/graph'
-// import Data from '../components/data'
 
 const Wrapper = styled.div`
 	display: flex;
@@ -57,22 +59,22 @@ const ContentHeadMenu = styled.div`
 `
 
 class Index extends Component {
-	static getInitialProps({ req }) {
-		// Ensures material-ui renders the correct css prefixes server-side
-		let userAgent
-		if (process.browser) {
-			userAgent = navigator.userAgent
-		} else {
-			userAgent = req.headers['user-agent']
-		}
-
-		let theme = {}
-		theme.primary = '#71aeef'
-		theme.accent = '#1abaed'
-		theme.dark = '#2f2c3d'
-		theme.light = '#f2f1f1'
-
-		return { userAgent, theme }
+	static getInitialProps({ store }) {
+		store.dispatch(setTheme(theme))
+		store.dispatch(
+			setKeywords([
+				{ keyword: 'CIMB', unread: 5 },
+				{ keyword: 'TMB', unread: 10 },
+				{ keyword: 'SCB', unread: 15 },
+				{ keyword: 'KBANK' }
+			])
+		)
+		store.dispatch(
+			setGroups([
+				{ title: 'กองทุน', keywords: ['A', 'B', 'C'], unread: 20 },
+				{ title: 'หุ้น', keywords: ['D', 'E', 'F'], unread: 15 }
+			])
+		)
 	}
 
 	constructor(props, context) {
@@ -89,14 +91,13 @@ class Index extends Component {
 	}
 
 	render() {
-		const { userAgent, theme } = this.props
 		const { open } = this.state
 
 		return (
 			<Wrapper>
 				<style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 				<Head title="Home" />
-				<Side theme={theme} open={open} toggleSideBar={this.toggleSideBar} />
+				<Side open={open} toggleSideBar={this.toggleSideBar} />
 				<Content>
 					<ContentHead>
 						<ContentHeadHamburger onClick={this.toggleSideBar}>
@@ -104,11 +105,11 @@ class Index extends Component {
 						</ContentHeadHamburger>
 						<ContentHeadMenu>Thanapa Suthisa-ngiam</ContentHeadMenu>
 					</ContentHead>
-					<Monitoring theme={theme} />
+					<Monitoring />
 				</Content>
 			</Wrapper>
 		)
 	}
 }
 
-export default Index
+export default withRedux(store)(Index)

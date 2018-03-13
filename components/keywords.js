@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import forEach from 'lodash/forEach'
 
 const Wrapper = styled.div`
 	background: #ffffff;
 	border: 1px solid #eaeaea;
-	border-radius: 5px;
+	border-radius: ${props => props.radius};
 	padding-bottom: 24px;
 
 	@media screen and (max-width: 768px) {
@@ -46,8 +49,8 @@ const Sort = styled.div`
 
 	:hover {
 		color: #ffffff;
-		background: #1abaed;
-		border: 1px solid #1abaed;
+		background: ${props => props.accent};
+		border: 1px solid ${props => props.accent};
 	}
 `
 
@@ -63,7 +66,7 @@ const Menu = styled.ul`
 
 		:hover {
 			background: rgba(26, 186, 237, 0.1);
-			border-right: 3px solid #1abaed;
+			border-right: 3px solid ${props => props.accent};
 		}
 	}
 `
@@ -73,7 +76,7 @@ const Text = styled.div`
 `
 
 const Noti = styled.div`
-	color: #1abaed;
+	color: ${props => props.accent};
 	margin-right: 16px;
 `
 
@@ -92,8 +95,8 @@ const More = styled.div`
 
 	:hover {
 		color: #ffffff;
-		background: #1abaed;
-		border: 1px solid #1abaed;
+		background: ${props => props.accent};
+		border: 1px solid ${props => props.accent};
 	}
 `
 
@@ -110,50 +113,59 @@ class Keywords extends Component {
 	}
 
 	render() {
-		const { theme, data } = this.props
-		const { dataKeywords, allKeywords, dataGroup } = data
+		const { theme, keywords, groups } = this.props
+		let allUnreadKeywords = 0
+		forEach(keywords, value => (allUnreadKeywords += value.unread || 0))
 
 		return (
-			<Wrapper>
+			<Wrapper radius={theme.radius}>
 				<Zone>
 					<Top>
-						<TopLeft>Keywords (20)</TopLeft>
+						<TopLeft>Keywords ({keywords.length})</TopLeft>
 						<TopRight>
-							<Sort>เรียงตามชื่อ</Sort>
+							<Sort accent={theme.accent}>เรียงตามชื่อ</Sort>
 						</TopRight>
 					</Top>
-					<Menu>
+					<Menu accent={theme.accent}>
 						<li>
 							<Text>ทั้งหมด</Text>
-							<Noti>{allKeywords}</Noti>
+							<Noti accent={theme.accent}>{allUnreadKeywords}</Noti>
 						</li>
-						{dataKeywords.map((k, index) => (
-							<li key={index}>
-								<Text>{k.text}</Text>
-								<Noti>{k.noti}</Noti>
-							</li>
-						))}
+						{keywords &&
+							keywords.map((value, index) => (
+								<li key={index}>
+									<Text>{value.keyword}</Text>
+									<Noti accent={theme.accent}>{value.unread || 0}</Noti>
+								</li>
+							))}
 					</Menu>
-					<More>ดูทั้งหมด</More>
+					<More accent={theme.accent}>ดูทั้งหมด</More>
 				</Zone>
 				<Divide />
 				<Zone>
 					<Top>
-						<TopLeft>Group (10)</TopLeft>
+						<TopLeft>Group ({groups.length})</TopLeft>
 					</Top>
-					<Menu>
-						{dataGroup.map((g, index) => (
-							<li key={index}>
-								<Text>{g.text}</Text>
-								<Noti>{g.noti}</Noti>
-							</li>
-						))}
+					<Menu accent={theme.accent}>
+						{groups &&
+							groups.map((value, index) => (
+								<li key={index}>
+									<Text>{value.title}</Text>
+									<Noti accent={theme.accent}>{value.unread || 0}</Noti>
+								</li>
+							))}
 					</Menu>
-					<More>ดูทั้งหมด</More>
+					<More accent={theme.accent}>ดูทั้งหมด</More>
 				</Zone>
 			</Wrapper>
 		)
 	}
 }
 
-export default Keywords
+const mapStateToProps = ({ theme, keywords, groups }) => ({
+	theme,
+	keywords,
+	groups
+})
+
+export default connect(mapStateToProps)(Keywords)

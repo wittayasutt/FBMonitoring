@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+
 import Switch from './switch'
 import Filter from './filter'
 import Box from './box'
@@ -27,37 +28,14 @@ const RightTitle = styled.div`
 	align-items: center;
 `
 
-const Noti = styled.div`
-	height: 28px;
-	width: 56px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: ${props => props.background};
-	color: #ffffff;
-	border-radius: 20px;
-	font-size: 14px;
-`
-
 const Boxes = styled.div``
 
-class DataFeed extends Component {
+class Feed extends Component {
 	constructor(props, context) {
 		super(props, context)
-
-		this.state = {
-			select: 'all'
-		}
-	}
-
-	handleSwitch = select => {
-		this.setState({ select })
 	}
 
 	render() {
-		const { theme } = this.props
-		const { select } = this.state
-
 		const data = [
 			{
 				name: 'Thanapa Suthisa-ngiam',
@@ -89,20 +67,13 @@ class DataFeed extends Component {
 			<Wrapper>
 				<Title>
 					<LeftTitle>
-						<Switch
-							handleSwitch={this.handleSwitch}
-							select={select}
-							theme={theme}
-						/>
+						<Switch />
 					</LeftTitle>
 					<RightTitle>
-						<Filter theme={theme} />
-						{/* <Noti background={theme.accent}>10</Noti> */}
+						<Filter />
 					</RightTitle>
 				</Title>
-				<Boxes>
-					{data.map((d, index) => <Box theme={theme} data={d} key={index} />)}
-				</Boxes>
+				<Boxes>{data.map((d, index) => <Box data={d} key={index} />)}</Boxes>
 				<Pagination
 					size="small"
 					defaultCurrent={1}
@@ -115,4 +86,4 @@ class DataFeed extends Component {
 	}
 }
 
-export default DataFeed
+export default Feed

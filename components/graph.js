@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
 import { DatePicker } from 'antd'
 const { RangePicker } = DatePicker
 
 const Wrapper = styled.div`
 	background: #ffffff;
 	border: 1px solid #eaeaea;
-	border-radius: 5px;
+	border-radius: ${props => props.radius};
 `
 
 const Title = styled.div`
@@ -107,7 +109,7 @@ class Graph extends Component {
 		// 	}
 
 		return (
-			<Wrapper>
+			<Wrapper radius={theme.radius}>
 				<Title>
 					<LeftTitle>
 						<CollapseButton onClick={this.collapseToggle}>
@@ -152,4 +154,10 @@ class Graph extends Component {
 	}
 }
 
-export default Graph
+const mapStateToProps = ({ theme, keywords, groups }) => ({
+	theme,
+	keywords,
+	groups
+})
+
+export default connect(mapStateToProps)(Graph)

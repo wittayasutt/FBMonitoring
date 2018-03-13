@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
 import Sentiment from './sentiment'
 
 const Wrapper = styled.div`
@@ -106,10 +108,10 @@ const Middle = styled.div`
 	font-size: 16px;
 
 	a {
-		color: ${props => props.color};
+		color: ${props => props.accent};
 
 		:hover {
-			color: ${props => props.color};
+			color: ${props => props.accent};
 		}
 	}
 `
@@ -149,7 +151,7 @@ const Saved = styled.div`
 	}
 
 	:hover i {
-		color: ${props => props.color};
+		color: ${props => props.accent};
 	}
 `
 
@@ -170,17 +172,17 @@ const SavedMobile = styled.div`
 	}
 
 	:hover i {
-		color: ${props => props.color};
+		color: ${props => props.accent};
 	}
 `
 
 const More = styled.div`
-	color: ${props => props.color};
+	color: ${props => props.accent};
 	transition: 0.2s;
 	cursor: pointer;
 
 	:hover {
-		color: ${props => props.color};
+		color: ${props => props.accent};
 		opacity: 0.8;
 	}
 `
@@ -194,7 +196,7 @@ class Box extends Component {
 		const { theme, data } = this.props
 
 		return (
-			<Wrapper borderColor={theme.accent} new={data.type === 'Post'}>
+			<Wrapper>
 				<Top>
 					<Left>
 						<UserPicture />
@@ -217,12 +219,12 @@ class Box extends Component {
 						</Name>
 					</Left>
 					<Right>
-						<SavedMobile color={theme.accent}>
+						<SavedMobile accent={theme.accent}>
 							<i className="fas fa-bookmark" />
 						</SavedMobile>
 					</Right>
 				</TopMobile>
-				<Middle color={theme.accent}>{data.text}</Middle>
+				<Middle accent={theme.accent}>{data.text}</Middle>
 				<Bottom>
 					<Left>
 						<Answer>
@@ -231,13 +233,13 @@ class Box extends Component {
 						<Divide />
 						<Sentiment>Sentiment</Sentiment>
 						<DivideDesktop />
-						<Saved color={theme.accent}>
+						<Saved accent={theme.accent}>
 							<i className="fas fa-bookmark" />
 							Saved
 						</Saved>
 					</Left>
 					<Right>
-						<More color={theme.accent}>ดูโพส</More>
+						<More accent={theme.accent}>ดูโพส</More>
 					</Right>
 				</Bottom>
 			</Wrapper>
@@ -245,4 +247,6 @@ class Box extends Component {
 	}
 }
 
-export default Box
+const mapStateToProps = ({ theme }) => ({ theme })
+
+export default connect(mapStateToProps)(Box)

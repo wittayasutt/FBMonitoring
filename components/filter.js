@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
 import { Radio } from 'antd'
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
@@ -130,4 +132,6 @@ class Filter extends Component {
 	}
 }
 
-export default onClickOutside(Filter)
+const mapStateToProps = ({ theme }) => ({ theme })
+
+export default connect(mapStateToProps)(onClickOutside(Filter))

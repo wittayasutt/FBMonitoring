@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 const WrapperCollapse = styled.div`
 	min-height: 100vh;
@@ -17,7 +18,7 @@ const WrapperCollapse = styled.div`
 const Wrapper = styled.div`
 	min-height: 100%;
 	width: 350px;
-	background: ${props => props.background};
+	background: ${props => props.dark};
 	color: #ffffff;
 
 	@media screen and (max-width: 1023px) {
@@ -91,7 +92,7 @@ class Side extends Component {
 
 		return (
 			<WrapperCollapse open={open}>
-				<Wrapper background={theme.dark}>
+				<Wrapper dark={theme.dark}>
 					<Head>
 						<HeadMenu>FB Group Monitoring</HeadMenu>
 						<HeadHamburger onClick={toggleSideBar}>
@@ -112,4 +113,6 @@ class Side extends Component {
 	}
 }
 
-export default Side
+const mapStateToProps = ({ theme }) => ({ theme })
+
+export default connect(mapStateToProps)(Side)
